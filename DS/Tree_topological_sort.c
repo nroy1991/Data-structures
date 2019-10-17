@@ -15,28 +15,27 @@ int topsort[MAX],indeg[MAX];
 create_graph();
 printf("\n The adjacency matrix is:");
 display();
-/*Find the in–degree of each node*/
+
 for(node = 1; node <= n; node++)
 {
-indeg[node] = find_indegree(node);
-if( indeg[node] == 0 )
-insert_queue(node);
-}
-while(front <= rear) /*Continue loop until queue is empty */
+  indeg[node] = find_indegree(node);
+  if( indeg[node] == 0 )
+    insert_queue(node);
+  }
+while(front <= rear)
 {
-del_node = delete_queue();
-topsort[j] = del_node; /*Add the deleted node to topsort*/
-j++;
-/*Delete the del_node edges */
-for(node = 1; node <= n; node++)
-{
-if(adj[del_node][node] == 1 )
-{
-adj[del_node][node] = 0;
-indeg[node] = indeg[node] – 1;
-if(indeg[node] == 0)
-insert_queue(node);
-}
+  del_node = delete_queue();
+  topsort[j] = del_node;
+  j++;
+  for(node = 1; node <= n; node++)
+  {
+    if(adj[del_node][node] == 1 )
+  {
+    adj[del_node][node] = 0;
+    indeg[node] = indeg[node] – 1;
+    if(indeg[node] == 0)
+    insert_queue(node);
+  }
 }
 }
 printf("The topological sorting can be given as :\n");
@@ -51,17 +50,17 @@ scanf("%d",&n);
 max_edges = n*(n – 1);
 for(i = 1; i <= max_edges; i++)
 {
-printf("\n Enter edge %d(0 to quit): ",i);
-scanf("%d %d",&org,&dest);
-if((org == 0) && (dest == 0))
-break;
-if( org > n || dest > n || org <= 0 || dest <= 0)
-{
-printf("\n Invalid edge");
-i––;
-}
-else
-adj[org][dest] = 1;
+  printf("\n Enter edge %d(0 to quit): ",i);
+  scanf("%d %d",&org,&dest);
+  if((org == 0) && (dest == 0))
+  break;
+  if( org > n || dest > n || org <= 0 || dest <= 0)
+  {
+    printf("\n Invalid edge");
+    i––;
+  }
+  else
+  adj[org][dest] = 1;
 }
 }
 void display()
@@ -69,21 +68,21 @@ void display()
 int i,j;
 for(i=1;i<=n;i++)
 {
-printf("\n");
-for(j=1;j<=n;j++)
-printf("%3d",adj[i][j]);
+  printf("\n");
+  for(j=1;j<=n;j++)
+    printf("%3d",adj[i][j]);
 }
 }
 void insert_queue(int node)
 {
 if (rear==MAX–1)
-printf("\n OVERFLOW ");
+  printf("\n OVERFLOW ");
 else
 {
-if (front == –1) /*If queue is initially empty */
-Graphs 405
-front=0;
-queue[++rear] = node ;
+  if (front == –1)
+  Graphs 405
+  front=0;
+  queue[++rear] = node ;
 }
 }
 int delete_queue()
@@ -91,13 +90,13 @@ int delete_queue()
 int del_node;
 if (front == –1 || front > rear)
 {
-printf("\n UNDERFLOW ");
-return ;
+  printf("\n UNDERFLOW ");
+  return ;
 }
 else
 {
-del_node = queue[front++];
-return del_node;
+  del_node = queue[front++];
+  return del_node;
 }
 }
 int find_indegree(int node)
@@ -105,8 +104,8 @@ int find_indegree(int node)
 int i,in_deg = 0;
 for(i = 1; i <= n; i++)
 {
-if( adj[i][node] == 1 )
-in_deg++;
+  if( adj[i][node] == 1 )
+    in_deg++;
 }
 return in_deg;
 }
